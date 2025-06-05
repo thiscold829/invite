@@ -1,233 +1,142 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이찬 ♥ ㅁㅈ 초대합니다</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이찬 ♥ ㅁㅈ Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --color-bg: #000000;
-      --color-text: #ffffff;
-      --color-accent: #f857a6;
-      --font-main: 'Nanum Myeongjo', serif;
-    }
-
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      background: var(--color-bg);
-      color: var(--color-text);
-      font-family: var(--font-main);
+      font-family: 'Playfair Display', serif;
+      background-color: #000;
+      color: #fff;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
-    .overlay {
+    .intro-screen {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle, #111111, #000000);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #fff0, #000);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      animation: fadeOut 3s ease-out 4s forwards;
+      z-index: 10;
+      animation: fadeOut 5s ease forwards 4s;
     }
 
-    .invitation-box {
-      padding: 2rem 3rem;
-      border: 3px solid white;
-      border-radius: 20px;
+    .intro-text {
+      font-size: 3rem;
       text-align: center;
-      animation: popIn 2s ease;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
+      color: #fff;
+      animation: fadeInScale 3s ease forwards;
     }
 
-    .invitation-box h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      animation: neonText 2s infinite alternate;
-    }
-
-    .invitation-box p {
-      font-size: 1.2rem;
-    }
-
-    .hero {
+    header {
+      position: relative;
       height: 100vh;
-      background: radial-gradient(circle, #000000, #111111);
+      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: white;
-      position: relative;
-      animation: fadeIn 2s ease-in-out forwards;
       overflow: hidden;
     }
 
-    .hero::after {
+    header h1 {
+      font-size: 4.5rem;
+      margin: 0;
+      color: #ffffff;
+      animation: glowText 2s infinite alternate;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      color: #ccc;
+    }
+
+    .scene {
+      height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      position: relative;
+    }
+
+    .scene::before {
       content: "";
       position: absolute;
-      width: 300%;
-      height: 300%;
-      top: -100%;
-      left: -100%;
-      background: conic-gradient(from 0deg, #ff416c, #ff4b2b, #ff416c);
-      animation: spin 20s linear infinite;
-      opacity: 0.07;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
     }
 
-    .hero h1 {
-      font-size: 4rem;
-      z-index: 1;
-      animation: slideDown 1.5s ease-out;
-    }
-
-    .hero .heart {
-      font-size: 3rem;
-      margin: 1rem 0;
-      animation: pulse 2s infinite ease-in-out;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      max-width: 600px;
-      margin: 0 auto;
-      z-index: 1;
-      animation: fadeInText 3s ease-in-out;
-    }
-
-    .video-section {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .video-section video {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.2) contrast(1.2);
-    }
-
-    .video-content {
+    .scene-content {
       position: relative;
       z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
+      font-size: 2rem;
       backdrop-filter: blur(3px);
     }
 
-    .video-content h2 {
-      font-size: 3rem;
-      animation: neonText 2s ease infinite alternate;
-    }
-
-    .video-content p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      max-width: 600px;
-      animation: fadeInText 3s ease-in-out;
-    }
-
-    .footer {
-      padding: 3rem 1rem;
+    footer {
+      background: #111;
+      padding: 3rem;
       text-align: center;
-      background: linear-gradient(90deg, #111, #222);
-      font-size: 1rem;
-      color: #aaa;
-      text-shadow: 1px 1px 3px #000;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      font-size: 0.9rem;
+      color: #888;
     }
 
     @keyframes fadeOut {
       to { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes slideDown {
-      from { transform: translateY(-100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    @keyframes fadeInText {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes neonText {
-      from { text-shadow: 0 0 10px #ff6ec4, 0 0 20px #ff6ec4; }
-      to { text-shadow: 0 0 15px #f9f871, 0 0 30px #f9f871; }
-    }
-
-    @keyframes popIn {
-      0% { transform: scale(0.5); opacity: 0; }
+    @keyframes fadeInScale {
+      0% { transform: scale(0.7); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #ff4b2b, 0 0 20px #ff416c; }
+      to { text-shadow: 0 0 20px #f9f871, 0 0 40px #f9f871; }
+    }
+
     @media (max-width: 768px) {
-      .hero h1 {
+      header h1 {
         font-size: 2.5rem;
       }
-      .video-content h2 {
-        font-size: 2rem;
+      .scene-content {
+        font-size: 1.2rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="invitation-box">
-      <h1>초대장이 도착했습니다</h1>
-      <p>화면을 스크롤하여 열어보세요</p>
+  <div class="intro-screen">
+    <div class="intro-text">
+      🎬 초대장이 시작됩니다
     </div>
   </div>
 
-  <section class="hero">
-    <h1>이찬 <span class="heart">♥</span> ㅁㅈ</h1>
-    <p>영화 같은 하루, 그 시작에<br>당신을 초대합니다</p>
-  </section>
+  <header>
+    <h1>이찬 ♥ ㅁㅈ</h1>
+    <p>함께 걷는 인생의 시작에 초대합니다</p>
+  </header>
 
-  <section class="video-section">
-    <video src="https://cdn.coverr.co/videos/coverr-love-couple-8030/1080p.mp4" autoplay muted loop playsinline></video>
-    <div class="video-content">
-      <h2>언젠가, 어딘가에서</h2>
-      <p>눈부신 순간 속에서,<br>당신과 함께하길 소망합니다.</p>
+  <section class="scene">
+    <div class="scene-content">
+      "언젠가, 어딘가에서<br>당신과 마주하길 바랍니다."
     </div>
   </section>
 
-  <footer class="footer">
-    Designed for love, by 이찬 🕊️
+  <footer>
+    Designed with cinematic elegance · 이찬 🕊️
   </footer>
 </body>
 </html>
