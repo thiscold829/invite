@@ -2,141 +2,251 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>이찬 ♥ ㅁㅈ Invitation</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>이찬 &amp; ㅁㅈ의 결혼식 초대장</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+
   <style>
-    html, body {
+    /* === 색상 변수 === */
+    :root {
+      --bg-gradient-top: #1a2a2f;   /* 짙은 청록색 계열 */
+      --bg-gradient-bottom: #08121e;/* 아주 짙은 밤색 */
+      --text-gold: #d49b6a;         /* 엔틱 골드 */
+      --text-white: #ffffff;
+      --petal-color: rgba(212, 155, 106, 0.3); /* 연한 골드색 꽃잎 */
+      --petal-stem: rgba(212, 155, 106, 0.7);
+      --font-heading: 'Noto Serif KR', serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+    }
+
+    /* === 전체 초기화 === */
+    * {
       margin: 0;
       padding: 0;
-      font-family: 'Playfair Display', serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
+      box-sizing: border-box;
     }
-
-    .intro-screen {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(circle at center, #fff0, #000);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      animation: fadeOut 5s ease forwards 4s;
-    }
-
-    .intro-text {
-      font-size: 3rem;
-      text-align: center;
-      color: #fff;
-      animation: fadeInScale 3s ease forwards;
-    }
-
-    header {
-      position: relative;
-      height: 100vh;
-      background: linear-gradient(120deg, #0f0c29, #302b63, #24243e);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    body {
       overflow: hidden;
-    }
-
-    header h1 {
-      font-size: 4.5rem;
-      margin: 0;
-      color: #ffffff;
-      animation: glowText 2s infinite alternate;
-    }
-
-    header p {
-      font-size: 1.5rem;
-      margin-top: 1rem;
-      color: #ccc;
-    }
-
-    .scene {
+      font-family: var(--font-body);
+      background: linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
+      color: var(--text-white);
       height: 100vh;
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80');
-      background-size: cover;
-      background-position: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
+      width: 100vw;
       position: relative;
     }
 
-    .scene::before {
-      content: "";
+    /* === 숲 실루엣 레이어 === */
+    .forest-layer {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .scene-content {
-      position: relative;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 50vh;
+      background: url('https://raw.githubusercontent.com/user/repo/forest_silhouette_layer1.png') repeat-x; /* 레이어1: 멀리 있는 나무 실루엣 */
+      background-size: contain;
       z-index: 1;
-      font-size: 2rem;
-      backdrop-filter: blur(3px);
+      animation: moveForest1 60s linear infinite;
+    }
+    .forest-layer.layer2 {
+      height: 60vh;
+      background: url('https://raw.githubusercontent.com/user/repo/forest_silhouette_layer2.png') repeat-x; /* 레이어2: 가까운 나무 실루엣 */
+      background-size: contain;
+      opacity: 0.8;
+      z-index: 2;
+      animation: moveForest2 40s linear infinite;
+    }
+    @keyframes moveForest1 {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes moveForest2 {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-66%); }
     }
 
-    footer {
-      background: #111;
-      padding: 3rem;
+    /* === 커플 일러스트 SVG 컨테이너 === */
+    .couple-container {
+      position: absolute;
+      bottom: 10vh;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40vw;
+      max-width: 400px;
+      z-index: 3;
+    }
+    .couple-container svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* === 초대 문구 영역 === */
+    .invitation {
+      position: absolute;
+      top: 10vh;
+      left: 50%;
+      transform: translateX(-50%);
       text-align: center;
-      font-size: 0.9rem;
-      color: #888;
+      z-index: 4;
+      padding: 1rem 2rem;
+      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+    }
+    .invitation h1 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      color: var(--text-gold);
+      text-shadow: 0 0 8px rgba(212,155,106,0.6);
+      margin-bottom: 0.5rem;
+    }
+    .invitation p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      color: var(--text-white);
+    }
+    .invitation .names {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .invitation .details {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text-white);
+    }
+    .invitation .details span {
+      display: inline-block;
+      margin: 0.3rem 0;
+      font-weight: 500;
     }
 
-    @keyframes fadeOut {
-      to { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeInScale {
-      0% { transform: scale(0.7); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #ff4b2b, 0 0 20px #ff416c; }
-      to { text-shadow: 0 0 20px #f9f871, 0 0 40px #f9f871; }
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.5rem;
-      }
-      .scene-content {
-        font-size: 1.2rem;
-      }
+    /* === 꽃잎 캔버스 === */
+    #petalCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 5;
     }
   </style>
 </head>
 <body>
-  <div class="intro-screen">
-    <div class="intro-text">
-      🎬 초대장이 시작됩니다
+  <!-- 숲 배경 레이어 -->
+  <div class="forest-layer"></div>
+  <div class="forest-layer layer2"></div>
+
+  <!-- 커플 일러스트 (단순 SVG 예시, 필요 시 실제 Ghibli풍 일러스트 교체) -->
+  <div class="couple-container">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <!-- 배경 원자욱 -->
+      <circle cx="150" cy="150" r="140" fill="rgba(255,255,255,0.05)" />
+      <!-- 남자 캐릭터 -->
+      <g id="groom" transform="translate(80,120)">
+        <path d="M40 0 C50 0, 60 10, 55 20 C70 30, 70 55, 50 60 C30 55, 30 30, 45 20 C40 10, 45 0, 55 0 Z"
+              fill="#fef3d5" stroke="#2b2b2b" stroke-width="2"/>
+        <circle cx="49" cy="20" r="3" fill="#2b2b2b"/>
+        <path d="M48 27 q2 2, 4 0" stroke="#2b2b2b" stroke-width="1" fill="none"/>
+        <rect x="35" y="50" width="28" height="60" rx="6" ry="6" fill="#2b2b2b"/>
+        <path d="M50 50 v-10 s-5 -10, -10 -10 h20 c-5 0, -10 10, -10 10 v10" fill="#2b2b2b"/>
+      </g>
+      <!-- 여자 캐릭터 -->
+      <g id="bride" transform="translate(145,120) scale(0.9,0.9)">
+        <path d="M40 0 C50 0, 60 15, 55 25 C70 35, 65 60, 45 60 C25 60, 30 35, 45 25 C40 15, 45 0, 50 0 Z"
+              fill="#fef3d5" stroke="#2b2b2b" stroke-width="2"/>
+        <circle cx="48" cy="23" r="3" fill="#2b2b2b"/>
+        <path d="M47 30 q2 2, 4 0" stroke="#2b2b2b" stroke-width="1" fill="none"/>
+        <path d="M30 60 c-5 20, 45 20, 40 0 l-10 -0.5 l-10 0.5 l-10 0.5 z" fill="#ffffff"/>
+        <path d="M30 60 c-5 20, 45 20, 40 0 l-10 -0.5 l-10 0.5 l-10 0.5 z" stroke="#2b2b2b" stroke-width="2" fill="none"/>
+        <path d="M30 60 l10 40 l10 -20 l10 20 l10 -40" fill="none" stroke="#2b2b2b" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 초대 문구 -->
+  <div class="invitation">
+    <h1>청첩장에 초대합니다</h1>
+    <div class="names">이찬 &amp; ㅁㅈ</div>
+    <p>두 사람이 하나 되어</p>
+    <p>여러분과 함께 기쁨을 나누고자 초대드립니다.</p>
+    <div class="details">
+      <span>날짜: 추후 공지</span><br/>
+      <span>장소: 추후 공지</span><br/>
+      <span>Dress Code: 자유롭게 빛나는 계절처럼</span>
     </div>
   </div>
 
-  <header>
-    <h1>이찬 ♥ ㅁㅈ</h1>
-    <p>함께 걷는 인생의 시작에 초대합니다</p>
-  </header>
+  <!-- 꽃잎 애니메이션 캔버스 -->
+  <canvas id="petalCanvas"></canvas>
 
-  <section class="scene">
-    <div class="scene-content">
-      "언젠가, 어딘가에서<br>당신과 마주하길 바랍니다."
-    </div>
-  </section>
+  <!-- 자바스크립트: 꽃잎 애니메이션 -->
+  <script>
+    const canvas = document.getElementById('petalCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    const petalCount = 80;
+    const petals = [];
 
-  <footer>
-    Designed with cinematic elegance · 이찬 🕊️
-  </footer>
+    window.addEventListener('resize', () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    });
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * -H;
+        this.size = 8 + Math.random() * 12;
+        this.speedY = 1 + Math.random() * 2;
+        this.speedX = 0.5 - Math.random(); // 좌우 흔들림
+        this.angle = Math.random() * Math.PI * 2;
+        this.angularSpeed = 0.02 + Math.random() * 0.02;
+        this.opacity = 0.3 + Math.random() * 0.4;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX * 2;
+        this.angle += this.angularSpeed;
+        if (this.y > H + 20 || this.x > W + 20 || this.x < -20) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(212,155,106,' + this.opacity + ')';
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(this.size / 2, -this.size / 3, this.size / 2, this.size / 3, 0, this.size);
+        ctx.bezierCurveTo(-this.size / 2, this.size / 3, -this.size / 2, -this.size / 3, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function initPetals() {
+      for (let i = 0; i < petalCount; i++) {
+        petals.push(new Petal());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, W, H);
+      for (let petal of petals) {
+        petal.update();
+        petal.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    initPetals();
+    animate();
+  </script>
 </body>
 </html>
