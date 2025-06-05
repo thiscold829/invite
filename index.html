@@ -25,124 +25,132 @@
       overflow-x: hidden;
     }
     header {
-      height: 100vh;
+      height: 120vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       position: relative;
-      background-color: #dce8dd;
+      background: linear-gradient(to top, #b2dfdb, #fffde7);
+      overflow: hidden;
     }
     .header-sun {
       position: absolute;
-      top: 10%;
+      top: 8%;
       left: 10%;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       background: radial-gradient(circle at center, #fdd835, #fbc02d);
       border-radius: 50%;
-      animation: sun-move 20s linear infinite alternate;
+      animation: sun-move 10s ease-in-out infinite alternate;
+      z-index: 1;
     }
     @keyframes sun-move {
       0% { transform: translateY(0); }
       100% { transform: translateY(20px); }
     }
-    .hill {
+    .cloud, .cloud2, .cloud3 {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: cloud-move 60s linear infinite;
+    }
+    .cloud { width: 120px; height: 60px; top: 10%; left: -150px; }
+    .cloud2 { width: 100px; height: 50px; top: 20%; left: -120px; animation-delay: 20s; }
+    .cloud3 { width: 80px; height: 40px; top: 30%; left: -90px; animation-delay: 40s; }
+    @keyframes cloud-move {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(220vw); }
+    }
+    .firefly {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: yellow;
+      border-radius: 50%;
+      animation: firefly-blink 2s infinite alternate ease-in-out;
+    }
+    .firefly:nth-child(odd) {
+      animation-duration: 3s;
+    }
+    @keyframes firefly-blink {
+      from { opacity: 0; }
+      to { opacity: 1; transform: translateY(-10px); }
+    }
+    .grass-layer {
       position: absolute;
       bottom: 0;
       width: 100%;
       height: 200px;
-      background: linear-gradient(to top, #6c8b72 0%, transparent 100%);
-      border-top-left-radius: 50% 20%;
-      border-top-right-radius: 50% 20%;
+      background: repeating-linear-gradient(to right, #689f38, #558b2f 10px);
+      z-index: 1;
     }
-    .tree {
+    .totoro {
       position: absolute;
-      bottom: 180px;
-      width: 30px;
-      height: 60px;
-      background: #4e5b49;
-      left: 20%;
-    }
-    .tree::before {
-      content: '';
-      position: absolute;
-      top: -40px;
-      left: -25px;
+      bottom: 150px;
+      left: 25%;
       width: 80px;
-      height: 80px;
-      background: radial-gradient(circle at center, #7cb342, #558b2f);
-      border-radius: 50%;
-    }
-    .header-content {
-      z-index: 2;
-      padding: 0 1rem;
-    }
-    .header-content h1 {
-      font-family: var(--font-title);
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-    .header-content p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 800px;
-      margin: auto;
-      text-align: center;
-    }
-    section h2 {
-      font-family: var(--font-title);
-      font-size: 2rem;
-      color: var(--accent);
-      margin-bottom: 1rem;
-    }
-    section p {
-      font-size: 1.1rem;
-      color: #444;
-      line-height: 1.8;
-    }
-    .character {
-      width: 60px;
-      height: 60px;
-      background: #555;
-      border-radius: 50%;
-      margin: 2rem auto;
+      height: 100px;
+      background: radial-gradient(ellipse at center, #8d6e63, #5d4037);
+      border-radius: 50% 50% 40% 40%;
+      z-index: 3;
       animation: float 4s ease-in-out infinite;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .totoro::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      left: 15px;
+      width: 15px;
+      height: 15px;
+      background: #fff;
+      border-radius: 50%;
     }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
+    .catbus {
+      position: absolute;
+      bottom: 100px;
+      right: -100px;
+      width: 120px;
+      height: 60px;
+      background: linear-gradient(to right, #bcaaa4, #6d4c41);
+      border-radius: 30px;
+      animation: catbus-move 20s linear infinite;
+      z-index: 2;
     }
-    @media (max-width: 768px) {
-      .header-content h1 {
-        font-size: 2.2rem;
-      }
-      section h2 {
-        font-size: 1.6rem;
-      }
+    .catbus::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      top: 20px;
+      left: 10px;
+    }
+    @keyframes catbus-move {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-150vw); }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="header-sun"></div>
-    <div class="tree"></div>
-    <div class="hill"></div>
+    <div class="cloud"></div>
+    <div class="cloud2"></div>
+    <div class="cloud3"></div>
+    <div class="grass-layer"></div>
+    <div class="firefly" style="top:20%; left:30%;"></div>
+    <div class="firefly" style="top:50%; left:60%;"></div>
+    <div class="firefly" style="top:70%; left:20%;"></div>
+    <div class="firefly" style="top:80%; left:80%;"></div>
+    <div class="totoro"></div>
+    <div class="catbus"></div>
     <div class="header-content">
       <h1>이찬 ♥ ㅁㅈ</h1>
-      <p>지브리 마을로 가는 숲길에서<br>당신을 기다립니다.</p>
+      <p>우리가 함께하기론 약속의 날에서<br>당신을 기다립니다.</p>
     </div>
   </header>
 
