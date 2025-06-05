@@ -2,352 +2,154 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>이찬 &amp; ㅁㅈ의 결혼식 초대장</title>
-
-  <!-- Google Fonts: 손글씨·브러시 스타일과 세리프 조합 -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet"/>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이찬 ♥ ㅁㅈ의 초대</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /*----------------------------------------
-      1. 전체 초기화 및 기본 설정
-    ----------------------------------------*/
-    html, body {
+    :root {
+      --bg: #f4f1ee;
+      --text: #2e2e2e;
+      --accent: #9fb798;
+      --font-title: 'Nanum Myeongjo', serif;
+      --font-body: 'Quicksand', sans-serif;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      height: 200vh; /* 충분한 스크롤 높이 확보 */
-      overflow-x: hidden;
-      background-color: #faf3e8; /* 따뜻한 크림빛 배경 */
-      font-family: 'Noto Serif KR', serif;
-      color: #4a3d33; /* 다크 브라운 계열 텍스트 */
+      box-sizing: border-box;
     }
 
-    /*----------------------------------------
-      2. 레이어 공통 스타일
-    ----------------------------------------*/
-    .layer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 110%;
-      height: 110%;
-      background-size: cover;
-      background-position: center center;
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      scroll-behavior: smooth;
     }
 
-    /*----------------------------------------
-      3. 뒤쪽 수채화 숲 레이어 (가장 멀리 보이는 그림)
-    ----------------------------------------*/
-    .layer-back {
-      z-index: 1;
-      /* 가능한 수채화 숲 이미지를 Unsplash 키워드로 불러옴 */
-      background-image: url('https://source.unsplash.com/1920x1080/?watercolor,forest,painting');
-      filter: brightness(0.85) saturate(1.2) contrast(1.1) blur(0.5px);
-    }
-
-    /*----------------------------------------
-      4. 중간 손그림 나무 레이어 (연필·펜 손그림 느낌)
-    ----------------------------------------*/
-    .layer-mid {
-      z-index: 2;
-      background-image: url('https://source.unsplash.com/1920x1080/?hand-drawn,trees');
-      filter: brightness(0.9) saturate(1.15) contrast(1.05);
-      opacity: 0.95;
-    }
-
-    /*----------------------------------------
-      5. 앞쪽 수채화 잎사귀 레이어 (디테일 강조)
-    ----------------------------------------*/
-    .layer-front {
-      z-index: 3;
-      background-image: url('https://source.unsplash.com/1920x1080/?watercolor,leaves,fall');
-      filter: brightness(0.9) saturate(1.2) contrast(1.1);
-      opacity: 0.9;
-    }
-
-    /*----------------------------------------
-      6. 따뜻한 오버레이: 은은한 햇살 느낌
-    ----------------------------------------*/
-    #overlay-warm {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(255, 235, 200, 0.2), transparent 70%);
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    /*----------------------------------------
-      7. 커플 일러스트 (처음 화면에 떠 있는 모습)
-    ----------------------------------------*/
-    .couple-container {
-      position: fixed;
-      bottom: 10vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30vw;
-      max-width: 350px;
-      z-index: 5;
-      animation: floatCouple 6s ease-in-out infinite alternate;
-    }
-    .couple-container img {
-      width: 100%;
-      height: auto;
-      border-radius: 50%;
-      border: 4px solid rgba(217, 195, 165, 0.7);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-    @keyframes floatCouple {
-      from { transform: translateX(-50%) translateY(0); }
-      to   { transform: translateX(-50%) translateY(-15px); }
-    }
-
-    /*----------------------------------------
-      8. 초대장 텍스트 박스
-      - 스크롤이 일정 지점(화면 높이 75%) 지나면 나타남
-    ----------------------------------------*/
-    .invitation {
-      position: absolute;
-      top: 120vh; /* 페이지 높이의 120% 지점에 배치 */
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80%;
-      max-width: 600px;
-      background: rgba(255, 250, 245, 0.95); /* 크림빛 바탕 */
-      border: 6px solid #d9c3a5;           /* 손그림 같은 테두리 */
-      border-radius: 20px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      z-index: 6;
+      background: url('https://cdn.jsdelivr.net/gh/chanhyeokpark/assets@main/ghibli-tree.jpg') no-repeat center center;
+      background-size: cover;
+      color: #fff;
+      position: relative;
     }
 
-    .invitation.visible {
-      opacity: 1;
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
     }
 
-    /*--- 초대장 내부 수채화 커플 일러스트 ---*/
-    .invitation img {
-      width: 140px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid rgba(217, 195, 165, 0.7);
+    .header-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 1rem;
+    }
+
+    .header-content h1 {
+      font-family: var(--font-title);
+      font-size: 2.8rem;
       margin-bottom: 1rem;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
-    /*--- 제목: 손글씨 느낌 브러시 폰트 ---*/
-    .invitation h1 {
-      font-family: 'Nanum Brush Script', cursive;
-      font-size: 3rem;
-      color: #b57e4a; /* 부드러운 황토-브라운 */
-      text-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-      margin-bottom: 0.3rem;
+    .header-content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
     }
 
-    /*--- 신랑·신부 이름 ---*/
-    .invitation .names {
-      font-family: 'Noto Serif KR', serif;
-      font-size: 2.2rem;
-      letter-spacing: 0.1em;
-      margin: 0.5rem 0 1rem;
-      color: #503b2e; /* 진한 브라운 */
-      text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
-    }
-
-    /*--- 본문 인삿말 ---*/
-    .invitation p {
-      font-size: 1.15rem;
-      line-height: 1.6;
-      margin: 0.7rem 0;
-    }
-
-    /*--- 세부 정보 (날짜/장소/Dress Code) ---*/
-    .invitation .details {
-      margin-top: 1.2rem;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    .invitation .details span {
+    .ghibli-img {
       display: block;
-      margin: 0.4rem 0;
-      font-weight: 500;
+      margin: 3rem auto 1rem;
+      max-width: 200px;
     }
 
-    /*----------------------------------------
-      9. 낙엽/꽃잎 애니메이션 (Canvas)
-    ----------------------------------------*/
-    #petalCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    section h2 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    section p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .ghibli-divider {
       width: 100%;
-      height: 100%;
-      z-index: 7;
-      pointer-events: none;
+      height: 200px;
+      background: url('https://cdn.jsdelivr.net/gh/chanhyeokpark/assets@main/ghibli-divider.png') center/contain no-repeat;
+      margin: 2rem 0;
     }
 
-    /*----------------------------------------
-      10. 반응형 (모바일 대응)
-    ----------------------------------------*/
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
     @media (max-width: 768px) {
-      .couple-container {
-        width: 50vw;
-      }
-      .invitation {
-        width: 90%;
-        padding: 1.5rem;
-      }
-      .invitation h1 {
+      .header-content h1 {
         font-size: 2.2rem;
       }
-      .invitation .names {
-        font-size: 1.8rem;
-      }
-      .invitation p {
-        font-size: 1rem;
-      }
-      .invitation .details {
-        font-size: 0.9rem;
+
+      section h2 {
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- 1) 뒤쪽 수채화 숲 레이어 -->
-  <div class="layer layer-back"></div>
-  <!-- 2) 중간 손그림 나무 레이어 -->
-  <div class="layer layer-mid"></div>
-  <!-- 3) 앞쪽 수채화 잎사귀 레이어 -->
-  <div class="layer layer-front"></div>
-  <!-- 4) 따뜻한 햇살 오버레이 -->
-  <div id="overlay-warm"></div>
-
-  <!-- 5) 커플 일러스트 (처음 화면에 보임) -->
-  <div class="couple-container">
-    <img src="https://source.unsplash.com/350x350/?watercolor,couple,illustration" alt="수채화 커플 일러스트" />
-  </div>
-
-  <!-- 6) 스크롤 후 등장할 초대장 텍스트 박스 -->
-  <div class="invitation" id="invitation">
-    <!-- 수채화 스타일 커플 이미지 -->
-    <img src="https://source.unsplash.com/200x200/?watercolor,couple,illustration" alt="수채화 커플 일러스트">
-    <h1>청첩장에 초대합니다</h1>
-    <div class="names">이찬 &amp; ㅁㅈ</div>
-    <p>수채화 붓 터치가 살아있는 숲 속에서</p>
-    <p>두 사람이 하나 되어 여러분을 초대합니다.</p>
-    <div class="details">
-      <span>📅 날짜: 추후 공지</span>
-      <span>📍 장소: 추후 공지</span>
-      <span>👗 Dress Code: 자연의 색을 닮은 편안한 복장</span>
+  <header>
+    <div class="header-content">
+      <h1>이찬 ♥ ㅁㅈ</h1>
+      <p>바람이 부는 날, 나무 그늘 아래에서<br>당신을 기다립니다.</p>
     </div>
-  </div>
+  </header>
 
-  <!-- 7) 낙엽/꽃잎 애니메이션 Canvas -->
-  <canvas id="petalCanvas"></canvas>
+  <section>
+    <img src="https://cdn.jsdelivr.net/gh/chanhyeokpark/assets@main/ghibli-couple.png" alt="지브리 커플 일러스트" class="ghibli-img">
+    <h2>우리가 함께 걸어가는 길</h2>
+    <p>
+      햇살이 좋은 어느 날,<br>
+      작은 약속을 하나 만들었습니다.<br>
+      우리는 이제, 서로의 나무가 되어주기로 했습니다.<br><br>
+      그 시작의 자리에<br>
+      당신을 초대하고 싶습니다.
+    </p>
+  </section>
 
-  <script>
-    //=============================
-    // 1) 스크롤 기반 패럴랙스 효과
-    //=============================
-    const layerBack  = document.querySelector('.layer-back');
-    const layerMid   = document.querySelector('.layer-mid');
-    const layerFront = document.querySelector('.layer-front');
-    const invitation = document.getElementById('invitation');
+  <div class="ghibli-divider" aria-hidden="true"></div>
 
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      // 레이어별 서로 다른 속도로 이동시키기
-      layerBack.style.transform  = `translateY(${scrollY * 0.2}px)`;
-      layerMid.style.transform   = `translateY(${scrollY * 0.4}px)`;
-      layerFront.style.transform = `translateY(${scrollY * 0.6}px)`;
+  <section>
+    <img src="https://cdn.jsdelivr.net/gh/chanhyeokpark/assets@main/totoro.png" alt="토토로 일러스트" class="ghibli-img">
+    <h2>언제, 어디서</h2>
+    <p>
+      정확한 시간과 장소는 곧 알려드릴게요.<br>
+      중요한 건, 당신이 함께해주신다는 마음입니다 🌿
+    </p>
+  </section>
 
-      // 스크롤이 화면 높이의 75% 이상 내려가면 초대장 박스 노출
-      if (scrollY > window.innerHeight * 0.75) {
-        invitation.classList.add('visible');
-      }
-    });
-
-    //======================================
-    // 2) Canvas 기반 낙엽/꽃잎 애니메이션
-    //======================================
-    const canvas = document.getElementById('petalCanvas');
-    const ctx    = canvas.getContext('2d');
-    let width    = canvas.width  = window.innerWidth;
-    let height   = canvas.height = window.innerHeight;
-    const petals = [];
-    const COUNT  = 120;
-
-    window.addEventListener('resize', () => {
-      width  = canvas.width  = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    class Petal {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * -height;
-        this.size = 4 + Math.random() * 12;
-        this.speedY = 0.7 + Math.random() * 1.5;
-        this.speedX = (Math.random() - 0.5) * 1.2;
-        this.angle  = Math.random() * Math.PI * 2;
-        this.angularSpeed = 0.005 + Math.random() * 0.015;
-        this.opacity = 0.2 + Math.random() * 0.4;
-        // 미묘한 수채화 색조 낙엽 컬러
-        const r = 200 + Math.random() * 30; // 200~230
-        const g = 150 + Math.random() * 30; // 150~180
-        const b = 100 + Math.random() * 30; // 100~130
-        this.color = `rgba(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)}, ${this.opacity})`;
-      }
-      update() {
-        this.y += this.speedY;
-        this.x += this.speedX;
-        this.angle += this.angularSpeed;
-        if (this.y > height + 20 || this.x > width + 20 || this.x < -20) {
-          this.reset();
-        }
-      }
-      draw() {
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-        ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(this.size * 0.5, -this.size * 0.3, this.size * 0.5, this.size * 0.3, 0, this.size);
-        ctx.bezierCurveTo(-this.size * 0.5, this.size * 0.3, -this.size * 0.5, -this.size * 0.3, 0, 0);
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-
-    function initPetals() {
-      for (let i = 0; i < COUNT; i++) {
-        petals.push(new Petal());
-      }
-    }
-
-    function animatePetals() {
-      ctx.clearRect(0, 0, width, height);
-      petals.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animatePetals);
-    }
-
-    initPetals();
-    animatePetals();
-  </script>
+  <footer>
+    Designed with quiet elegance · 이찬 드림
+  </footer>
 </body>
 </html>
