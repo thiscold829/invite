@@ -7,106 +7,101 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fdfaf6;
-      --text: #2e2e2e;
+      --bg: #fcf9f3;
+      --text: #2f2f2f;
       --accent: #6c8b72;
       --font-title: 'Nanum Myeongjo', serif;
       --font-body: 'Quicksand', sans-serif;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     html, body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      scroll-behavior: smooth;
     }
-
     header {
       height: 100vh;
+      background: url('https://i.ibb.co/SRcjPyW/totoro-forest.jpg') center/cover no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/0/0a/My_Neighbor_Totoro_tree_scene.jpg') no-repeat center center;
-      background-size: cover;
-      color: #fff;
+      color: white;
       position: relative;
     }
-
     header::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.45);
+      inset: 0;
+      background-color: rgba(0,0,0,0.4);
     }
-
     .header-content {
       position: relative;
       z-index: 1;
       padding: 0 1rem;
     }
-
     .header-content h1 {
       font-family: var(--font-title);
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin-bottom: 1rem;
     }
-
     .header-content p {
       font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto;
       line-height: 1.8;
     }
-
-    .ghibli-img {
-      display: block;
-      margin: 2rem auto 1rem;
-      max-width: 260px;
-      border-radius: 0.5rem;
-    }
-
     section {
       padding: 4rem 1.5rem;
       max-width: 800px;
-      margin: 0 auto;
+      margin: auto;
       text-align: center;
     }
-
+    section img {
+      max-width: 100%;
+      margin: 2rem 0;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
     section h2 {
       font-family: var(--font-title);
-      font-size: 1.9rem;
-      margin-bottom: 1.2rem;
+      font-size: 2rem;
       color: var(--accent);
+      margin-bottom: 1rem;
     }
-
     section p {
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 1.1rem;
       color: #444;
+      line-height: 1.8;
     }
-
+    .scene {
+      background: url('https://i.ibb.co/6Nppv9R/ghibli-path.jpg') center/cover no-repeat;
+      background-attachment: fixed;
+      padding: 6rem 2rem;
+      color: white;
+      font-family: var(--font-title);
+    }
+    .scene p {
+      font-size: 1.5rem;
+      text-shadow: 1px 1px 3px #000;
+    }
     footer {
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2rem;
       font-size: 0.9rem;
-      color: #999;
+      color: #888;
     }
-
     @media (max-width: 768px) {
       .header-content h1 {
         font-size: 2.2rem;
       }
-
       section h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
       }
     }
   </style>
@@ -115,12 +110,12 @@
   <header>
     <div class="header-content">
       <h1>이찬 ♥ ㅁㅈ</h1>
-      <p>바람이 부는 날, 나무 그늘 아래에서<br>당신을 기다립니다.</p>
+      <p>지브리 숲길을 따라 도착한<br>마을 한가운데서 당신을 기다립니다.</p>
     </div>
   </header>
 
   <section>
-    <img src="https://i.imgur.com/LUIq49c.png" alt="지브리 커플 일러스트" class="ghibli-img">
+    <img src="https://i.ibb.co/TP4DQhj/ghibli-couple.png" alt="지브리 커플 일러스트">
     <h2>우리가 함께 걸어가는 길</h2>
     <p>
       햇살이 좋은 어느 날,<br>
@@ -131,8 +126,12 @@
     </p>
   </section>
 
+  <div class="scene">
+    <p>그리고 어느 날,<br>고양이버스가 지나가는 길목에서<br>우린 다시 만납니다.</p>
+  </div>
+
   <section>
-    <img src="https://i.imgur.com/zQe5i6K.png" alt="토토로 일러스트" class="ghibli-img">
+    <img src="https://i.ibb.co/BfBdscn/totoro-standing.png" alt="토토로 일러스트">
     <h2>언제, 어디서</h2>
     <p>
       정확한 시간과 장소는 곧 알려드릴게요.<br>
