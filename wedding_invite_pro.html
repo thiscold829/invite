@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이찬 ♥ ㅁㅈ 초대합니다</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --accent: #c56c6c;
+      --font-main: 'Noto Serif KR', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 10vh 5vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero {
+      background: linear-gradient(to bottom, #fff0f0, #ffffff);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero .heart {
+      font-size: 2rem;
+      color: var(--accent);
+      margin: 0.5rem 0;
+      animation: pulse 1.5s infinite;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .parallax {
+      background: url('https://images.unsplash.com/photo-1517503733351-ecf7f3f5906b?auto=format&fit=crop&w=1280&q=80') center / cover no-repeat fixed;
+      color: white;
+      position: relative;
+    }
+
+    .parallax::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .parallax-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer {
+      background: #f2f2f2;
+      font-size: 0.95rem;
+      color: #888;
+      padding: 2rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>이찬 <span class="heart">♥</span> ㅁㅈ</h1>
+    <p>함께 걷는 길의 시작에<br>소중한 분들을 초대합니다</p>
+  </section>
+
+  <section class="fade-up">
+    <p style="max-width: 500px; font-size: 1.1rem;">저희는 아직 정확한 날짜와 장소를 정하지 않았습니다.<br>하지만 그 날, 당신과 함께 하길 바랍니다.</p>
+  </section>
+
+  <section class="parallax">
+    <div class="parallax-content">
+      <h2 style="font-size: 2rem; margin-bottom: 1rem;">언젠가, 어딘가에서</h2>
+      <p style="font-size: 1rem; max-width: 600px; margin: 0 auto;">따뜻한 봄바람처럼, 고요한 가을햇살처럼<br>그 순간이 오면 다시 인사드리겠습니다</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    Designed with ❤️ by 이찬
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
