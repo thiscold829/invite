@@ -5,185 +5,183 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>이찬 &amp; ㅁㅈ의 결혼식 초대장</title>
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
 
   <style>
-    /* === 기본 색상 및 폰트 변수 === */
-    :root {
-      --font-heading: 'Noto Serif KR', serif;
-      --font-body: 'Noto Sans KR', sans-serif;
-      --text-gold: #f0c27b;
-      --text-white: #ffffff;
-    }
-
-    /* === 전체 초기화 === */
-    * {
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      overflow: hidden;
-      font-family: var(--font-body);
-      height: 100vh;
-      width: 100vw;
-      position: relative;
-      color: var(--text-white);
+      height: 200vh;
+      overflow-x: hidden;
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #000;
     }
 
-    /* === 배경 레이어 (parallax 효과) === */
-    .bg-layer {
-      position: absolute;
+    .layer {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 120%;
-      height: 120%;
+      width: 110%;
+      height: 110%;
       background-size: cover;
-      background-position: center;
-      transform: translate(-10%, -10%);
-      animation: parallax 30s linear infinite;
+      background-position: center center;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
     }
-    .bg-layer.layer-back {
-      background-image: url('https://source.unsplash.com/1920x1080/?forest,night'); /* 뒤쪽 숲 이미지 */
-      filter: brightness(0.3) contrast(1.2);
+
+    .layer-back {
       z-index: 1;
-      animation-duration: 40s;
+      background-image: url('https://source.unsplash.com/1920x1080/?studio-ghibli,forest,painting');
+      filter: saturate(1.3) blur(1px) brightness(0.8);
     }
-    .bg-layer.layer-front {
-      background-image: url('https://source.unsplash.com/1920x1080/?trees,silhouette'); /* 앞쪽 숲 실루엣 */
-      filter: brightness(0.2) contrast(1.1);
+
+    .layer-mid {
       z-index: 2;
-      animation-duration: 20s;
-      opacity: 0.8;
-    }
-    @keyframes parallax {
-      from { transform: translate(-10%, -10%) scale(1); }
-      to   { transform: translate(-15%, -15%) scale(1.05); }
+      background-image: url('https://source.unsplash.com/1920x1080/?mystical,forest');
+      filter: saturate(1.2) brightness(0.9);
     }
 
-    /* === 중앙 커플 일러스트 === */
-    .couple-container {
-      position: absolute;
-      bottom: 10vh;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 35vw;
-      max-width: 400px;
+    .layer-front {
       z-index: 3;
-    }
-    .couple-container img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      animation: floatCouple 6s ease-in-out infinite alternate;
-    }
-    @keyframes floatCouple {
-      from { transform: translateX(-50%) translateY(0); }
-      to   { transform: translateX(-50%) translateY(-15px); }
+      background-image: url('https://source.unsplash.com/1920x1080/?forest,silhouette');
+      filter: contrast(1.1) brightness(0.95);
+      opacity: 0.9;
     }
 
-    /* === 초대장 텍스트 박스 === */
+    #overlay-warm {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top, rgba(255, 223, 155, 0.15), transparent 60%);
+      pointer-events: none;
+      z-index: 4;
+    }
+
     .invitation {
       position: absolute;
-      top: 12vh;
+      top: 120vh;
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
       max-width: 600px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      z-index: 4;
-      text-align: center;
-      animation: fadeInText 2s ease-in-out forwards;
+      background: rgba(255, 248, 240, 0.9);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       opacity: 0;
+      transition: opacity 1s ease-in-out;
+      text-align: center;
+      z-index: 5;
     }
-    @keyframes fadeInText {
-      to { opacity: 1; }
+
+    .invitation.visible {
+      opacity: 1;
     }
+
+    .invitation img {
+      width: 150px;
+      border-radius: 50%;
+      border: 3px solid rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
     .invitation h1 {
-      font-family: var(--font-heading);
+      font-family: 'Noto Serif KR', serif;
       font-size: 3rem;
-      color: var(--text-gold);
-      text-shadow: 0 0 6px rgba(240, 194, 123, 0.8);
+      color: #d49b6a;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
       margin-bottom: 0.5rem;
     }
+
     .invitation .names {
-      font-family: var(--font-heading);
+      font-family: 'Noto Serif KR', serif;
       font-size: 2.4rem;
-      margin: 0.5rem 0 1rem;
-      color: var(--text-white);
       letter-spacing: 0.1em;
+      margin: 0.5rem 0 1rem;
+      color: #3b3b3b;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
     }
+
     .invitation p {
       font-size: 1.2rem;
       line-height: 1.6;
-      margin: 0.5rem 0;
-      color: var(--text-white);
+      color: #3b3b3b;
+      margin: 0.7rem 0;
     }
+
     .invitation .details {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       font-size: 1rem;
-      color: var(--text-white);
       line-height: 1.8;
+      color: #3b3b3b;
     }
+
     .invitation .details span {
       display: block;
-      margin: 0.3rem 0;
+      margin: 0.4rem 0;
       font-weight: 500;
     }
 
-    /* === 하단 애니메이션 꽃잎 (Canvas) === */
     #petalCanvas {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      z-index: 5;
+      z-index: 6;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <!-- 뒤쪽 숲 레이어 -->
-  <div class="bg-layer layer-back"></div>
-  <!-- 앞쪽 숲 실루엣 레이어 -->
-  <div class="bg-layer layer-front"></div>
+  <div class="layer layer-back"></div>
+  <div class="layer layer-mid"></div>
+  <div class="layer layer-front"></div>
+  <div id="overlay-warm"></div>
 
-  <!-- 커플 일러스트 (랜덤 anime couple 이미지) -->
-  <div class="couple-container">
-    <img src="https://source.unsplash.com/400x400/?anime,couple,illustration" alt="커플 일러스트" />
-  </div>
-
-  <!-- 초대장 텍스트 -->
-  <div class="invitation">
+  <div class="invitation" id="invitation">
+    <img src="https://source.unsplash.com/200x200/?anime,couple,ghibli" alt="커플 일러스트">
     <h1>청첩장에 초대합니다</h1>
     <div class="names">이찬 &amp; ㅁㅈ</div>
-    <p>지브리 영화 속 숲에서 만난 두 사람,</p>
-    <p>영혼이 하나 되어 여러분께 기쁨을 전하고자 합니다.</p>
+    <p>마법 같은 지브리 숲 속에서</p>
+    <p>두 사람이 하나 되어 여러분을 초대합니다.</p>
     <div class="details">
-      <span>날짜: 추후 공지</span>
-      <span>장소: 추후 공지</span>
-      <span>Dress Code: 자연의 색을 닮은 편안한 복장</span>
+      <span>📅 날짜: 추후 공지</span>
+      <span>📍 장소: 추후 공지</span>
+      <span>👗 Dress Code: 자연의 색을 닮은 편안한 복장</span>
     </div>
   </div>
 
-  <!-- 꽃잎 애니메이션을 위한 Canvas -->
   <canvas id="petalCanvas"></canvas>
 
-  <!-- JavaScript: 꽃잎 애니메이션 -->
   <script>
+    const back = document.querySelector('.layer-back');
+    const mid = document.querySelector('.layer-mid');
+    const front = document.querySelector('.layer-front');
+    const invitation = document.getElementById('invitation');
+
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      back.style.transform  = `translateY(${y * 0.2}px)`;
+      mid.style.transform   = `translateY(${y * 0.5}px)`;
+      front.style.transform = `translateY(${y * 0.8}px)`;
+
+      if (y > window.innerHeight * 0.8) {
+        invitation.classList.add('visible');
+      }
+    });
+
     const canvas = document.getElementById('petalCanvas');
     const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-    const petalCount = 100;
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
     const petals = [];
+    const COUNT = 120;
 
     window.addEventListener('resize', () => {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     });
 
     class Petal {
@@ -191,20 +189,24 @@
         this.reset();
       }
       reset() {
-        this.x = Math.random() * W;
-        this.y = Math.random() * -H;
-        this.size = 6 + Math.random() * 10;
-        this.speedY = 1 + Math.random() * 2;
-        this.speedX = 0.5 - Math.random();
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.size = 4 + Math.random() * 12;
+        this.speedY = 0.7 + Math.random() * 1.5;
+        this.speedX = (Math.random() - 0.5) * 1.2;
         this.angle = Math.random() * Math.PI * 2;
-        this.angularSpeed = 0.01 + Math.random() * 0.02;
-        this.opacity = 0.2 + Math.random() * 0.3;
+        this.angularSpeed = 0.005 + Math.random() * 0.015;
+        this.opacity = 0.2 + Math.random() * 0.4;
+        const r = 240 + Math.random() * 15;
+        const g = 194 + Math.random() * 20;
+        const b = 123 + Math.random() * 20;
+        this.color = `rgba(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)}, ${this.opacity})`;
       }
       update() {
         this.y += this.speedY;
-        this.x += this.speedX * 2;
+        this.x += this.speedX;
         this.angle += this.angularSpeed;
-        if (this.y > H + 20 || this.x > W + 20 || this.x < -20) {
+        if (this.y > height + 20 || this.x > width + 20 || this.x < -20) {
           this.reset();
         }
       }
@@ -213,27 +215,27 @@
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
         ctx.beginPath();
-        ctx.fillStyle = `rgba(240,194,123,${this.opacity})`;
+        ctx.fillStyle = this.color;
         ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(this.size/2, -this.size/3, this.size/2, this.size/3, 0, this.size);
-        ctx.bezierCurveTo(-this.size/2, this.size/3, -this.size/2, -this.size/3, 0, 0);
+        ctx.bezierCurveTo(this.size * 0.5, -this.size * 0.3, this.size * 0.5, this.size * 0.3, 0, this.size);
+        ctx.bezierCurveTo(-this.size * 0.5, this.size * 0.3, -this.size * 0.5, -this.size * 0.3, 0, 0);
         ctx.fill();
         ctx.restore();
       }
     }
 
     function initPetals() {
-      for (let i = 0; i < petalCount; i++) {
+      for (let i = 0; i < COUNT; i++) {
         petals.push(new Petal());
       }
     }
 
     function animate() {
-      ctx.clearRect(0, 0, W, H);
-      for (let p of petals) {
+      ctx.clearRect(0, 0, width, height);
+      petals.forEach(p => {
         p.update();
         p.draw();
-      }
+      });
       requestAnimationFrame(animate);
     }
 
